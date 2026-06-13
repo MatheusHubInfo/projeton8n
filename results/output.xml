@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.10.12 on linux)" generated="2026-06-13T00:43:42.281937" rpa="false" schemaversion="5">
+<suite id="s1" name="Login Check" source="/home/matheusalves/Área de Trabalho/projeto_n8n/tests/login_check.robot">
+<kw name="Open Headless Browser" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-06-13T00:43:42.461422" level="INFO">{"browser": "chromium", "headless": true, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "/home/matheusalves/\u00c1rea de Trabalho/projeto_n8n/results/browser/traces/temp/41c970ca-c228-455d-8e51-895b3848ed4a"}</msg>
+<msg time="2026-06-13T00:43:42.465818" level="INFO">Starting Browser process /home/matheusalves/.local/lib/python3.10/site-packages/Browser/wrapper/index.js using at 127.0.0.1:33057</msg>
+<msg time="2026-06-13T00:43:43.077575" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":true,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"/home/matheusalves/Área de Trabalho/projeto_n8n/results/browser/traces/temp/41c970ca-c228-455d-8e51-895b3848ed4a"}</msg>
+<arg>chromium</arg>
+<arg>headless=True</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-06-13T00:43:42.460653" elapsed="0.617188"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2026-06-13T00:43:43.079879" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  }
+}</msg>
+<msg time="2026-06-13T00:43:43.093135" level="INFO">Successfully created context. </msg>
+<msg time="2026-06-13T00:43:43.093246" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 720}}</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2026-06-13T00:43:43.078161" elapsed="0.015189"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-06-13T00:43:45.765783" level="INFO">Successfully initialized new page object and opened url: https://sauce-demo.myshopify.com/account/login</msg>
+<arg>${URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-06-13T00:43:43.093583" elapsed="2.672568"/>
+</kw>
+<status status="PASS" start="2026-06-13T00:43:42.459840" elapsed="3.306561"/>
+</kw>
+<test id="s1-t1" name="Validar Página De Login Está Visível" line="11">
+<kw name="Go To" owner="Browser">
+<msg time="2026-06-13T00:43:46.221362" level="INFO">Successfully opened URL https://sauce-demo.myshopify.com/account/login</msg>
+<arg>${URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2026-06-13T00:43:45.814082" elapsed="0.407495"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-06-13T00:43:46.265131" level="INFO">Waited for Element with selector text=Log in at state visible</msg>
+<arg>text=${LOGIN_TEXT}</arg>
+<arg>visible</arg>
+<arg>timeout=10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-06-13T00:43:46.221923" elapsed="0.043450"/>
+</kw>
+<doc>Acessa a página de login e valida se o botão de login está visível.</doc>
+<status status="PASS" start="2026-06-13T00:43:45.766609" elapsed="0.499090"/>
+</test>
+<kw name="Close Browser" owner="Browser" type="TEARDOWN">
+<msg time="2026-06-13T00:43:46.320821" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-06-13T00:43:46.277917" elapsed="0.043134"/>
+</kw>
+<status status="PASS" start="2026-06-13T00:43:42.282920" elapsed="4.038241"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Login Check" id="s1" pass="1" fail="0" skip="0">Login Check</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
