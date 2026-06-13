@@ -1,36 +1,36 @@
-# Usamos a imagem oficial do n8n como base (atualmente baseada em Debian/Ubuntu)
-FROM n8nio/n8n:latest
+# Usamos uma imagem estável do Python baseada em Ubuntu/Debian
+FROM python:3.10-slim
 
-# Alternamos para o usuário root para instalar as dependências do sistema
-USER root
-
-# Atualizamos os pacotes e instalamos Python, pip, Chromium e dependências usando apt
+# Instala o Node.js (necessário para o n8n) e dependências de sistema para o Chromium
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3 \
-    python3-pip \
-    python3-venv \
+    curl \
+    gnupg \
+    ca-certificates \
     chromium \
     libnss3 \
     libfreetype6 \
     libharfbuzz0b \
-    ca-certificates \
     fonts-freefont-ttf \
+    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-# Criamos um ambiente virtual do Python para o Robot Framework
-RUN python3 -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
+# Instala o n8n globalmente via npm
+RUN npm install -g n8n@latest --omit=dev
 
 # Instala o Robot Framework e a biblioteca Browser
 RUN pip install --no-cache-dir robotframework robotframework-browser
 
-# Inicializa os binários do Playwright/Browser
+# Inicializa os binários do Playwright/Browser do Robot Framework
 RUN rfbrowser init
 
-# Libera as permissões no n8n para rodar comandos de terminal
+# Configura as variáveis de ambiente necessárias para o n8n funcionar sem travas
 ENV NODE_FUNCTION_ALLOW_BUILTIN=*
 ENV NODE_FUNCTION_ALLOW_EXTERNAL=*
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 
-# Retornamos para o usuário padrão do n8n por segurança
-USER node
+# Expõe a porta padrão que o n8n usa
+EXPOSE 5678
+
+# Comando para iniciar o n8n assim que o container ligar no Render
+CMD ["n8n", "start"]
