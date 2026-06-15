@@ -30,7 +30,9 @@ jobs:
       - name: Executar os Testes em modo Headless
         run: |
           mkdir -p results
-          robot -d ./results tests/login_check.robot
+          echo "FORCANDO FALHA TEMPORÁRIA DA PIPELINE PARA TESTE DE PUSH"
+          exit 1
+          # robot -d ./results tests/login_check.robot
 
       - name: Upload dos Resultados do Robot
         if: always()
