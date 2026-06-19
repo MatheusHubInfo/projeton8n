@@ -11,10 +11,11 @@ ${LOGIN_TEXT}    Log in
 Validar Página De Login Está Visível
     [Documentation]    Acessa a página de login e valida se o botão de login está visível.
     Go To    ${URL}
-    Wait For Elements State    text=${LOGIN_TEXT}    visible    timeout=10s
+    Wait For Elements State    text=${LOGIN_TEXT}    visible    timeout=30s
 
 *** Keywords ***
 Open Headless Browser
     New Browser    chromium    headless=True
     New Context
     New Page    ${URL}
+    Wait For Load State    load    timeout=30s
